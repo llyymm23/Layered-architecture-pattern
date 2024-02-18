@@ -1,7 +1,7 @@
-import { PostsSerive } from '../services/posts.service.js'
+import { PostsService } from '../services/posts.service.js'
 
 export class PostsController {
-    postsService = new PostsSerive();
+    postsService = new PostsService();
 
     getPosts = async (req, res, next) => {
         try {
