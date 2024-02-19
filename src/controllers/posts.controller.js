@@ -29,4 +29,46 @@ export class PostsController {
             next(err);
         }
     }
+
+    getPostById = async (req, res, next) => {
+        try {
+            const { postId } = req.params;
+
+            const post = await this.postsService.findPostById(postId);
+
+            return res.status(200).json({ data: post });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    updatePost = async (req, res, next) => {
+        try {
+            const { postId } = req.params;
+            const { password, title, content } = req.body;
+
+            const updatedPost = await this.postsService.updatePost(
+                postId,
+                password,
+                title,
+                content,
+            );
+            return res.status(200).json({ data: updatedPost });
+        } catch (err) {
+            next(err);
+        }
+    };
+
+    deletePost = async (req, res, next) => {
+        try {
+            const { postId } = req.params;
+            const { password } = req.body;
+
+            const deletedPost = await this.postsService.deletePost(postId, password);
+
+            return res.status(200).json({ data: deletedPost });
+        } catch (err) {
+            next(err);
+        }
+    };
 }
